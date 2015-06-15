@@ -1,0 +1,23 @@
+{
+  "name": "flat-tree",
+  "version": "0.0.0",
+  "description": "A series of functions to map a binary tree to a list",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "tape": "^4.0.0"
+  },
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mafintosh/flat-tree.git"
+  },
+  "author": "Mathias Buus (@mafintosh)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mafintosh/flat-tree/issues"
+  },
+  "homepage": "https://github.com/mafintosh/flat-tree"
+}
