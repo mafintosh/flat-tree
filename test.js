@@ -36,11 +36,12 @@ tape('siblings', function (t) {
   t.end()
 })
 
-tape('roots', function (t) {
-  t.same(feed.roots(0), [])
-  t.same(feed.roots(2), [0])
-  t.same(feed.roots(20), [7, 17])
-  t.same(feed.roots(18), [7, 16])
-  t.same(feed.roots(16), [7])
+tape('fullRoots', function (t) {
+  t.same(feed.fullRoots(0), [])
+  t.same(feed.fullRoots(2), [0])
+  t.same(feed.fullRoots(8), [3])
+  t.same(feed.fullRoots(20), [7, 17])
+  t.same(feed.fullRoots(18), [7, 16])
+  t.same(feed.fullRoots(16), [7])
   t.end()
 })

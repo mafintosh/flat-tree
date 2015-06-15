@@ -1,4 +1,4 @@
-exports.roots = function (index) {
+exports.fullRoots = function (index) {
   if (index % 2 !== 0) throw new Error('You can only look up roots for depth(0) blocks')
 
   index /= 2
@@ -64,21 +64,4 @@ exports.offset = function (index, depth) {
   if (!depth) depth = exports.depth(depth)
 
   return ((index + 1) / (1 << depth) - 1) / 2
-}
-
-exports.draw = function (index) {
-  var str = ''
-
-  for (var i = 0; i <= index; i++) {
-    var depth = exports.depth(i)
-    var children = exports.children(i)
-    if (children && children[1] > index) {
-      str += '\n'
-    } else {
-      for (var j = 0; j < depth; j++) str += '   '
-      str += i + '\n'
-    }
-  }
-
-  return str
 }
