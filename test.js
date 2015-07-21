@@ -27,6 +27,20 @@ tape('children', function (t) {
   t.end()
 })
 
+tape('leftChild', function (t) {
+  t.same(feed.leftChild(0), -1)
+  t.same(feed.leftChild(1), 0)
+  t.same(feed.leftChild(3), 1)
+  t.end()
+})
+
+tape('rightChild', function (t) {
+  t.same(feed.rightChild(0), -1)
+  t.same(feed.rightChild(1), 2)
+  t.same(feed.rightChild(3), 5)
+  t.end()
+})
+
 tape('siblings', function (t) {
   t.same(feed.sibling(0), 2)
   t.same(feed.sibling(2), 0)

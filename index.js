@@ -43,10 +43,22 @@ exports.parent = function (index) {
   return exports.index(depth + 1, offset >> 1)
 }
 
-exports.children = function (index) {
+exports.leftChild = function (index, depth) {
+  if (index % 2 === 0) return -1
+  if (!depth) depth = exports.depth(index)
+  return exports.index(depth - 1, exports.offset(index, depth) << 1)
+}
+
+exports.rightChild = function (index, depth) {
+  if (index % 2 === 0) return -1
+  if (!depth) depth = exports.depth(index)
+  return exports.index(depth - 1, 1 + (exports.offset(index, depth) << 1))
+}
+
+exports.children = function (index, depth) {
   if (index % 2 === 0) return null
 
-  var depth = exports.depth(index)
+  if (!depth) depth = exports.depth(index)
   var offset = exports.offset(index, depth) << 1
 
   return [
