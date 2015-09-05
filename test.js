@@ -59,3 +59,21 @@ tape('fullRoots', function (t) {
   t.same(feed.fullRoots(16), [7])
   t.end()
 })
+
+tape('depths', function (t) {
+  t.same(feed.depth(0), 0)
+  t.same(feed.depth(1), 1)
+  t.same(feed.depth(2), 0)
+  t.same(feed.depth(3), 2)
+  t.same(feed.depth(4), 0)
+  t.end()
+})
+
+tape('offsets', function (t) {
+  t.same(feed.offset(0), 0)
+  t.same(feed.offset(1), 0)
+  t.same(feed.offset(2), 1)
+  t.same(feed.offset(3), 0)
+  t.same(feed.offset(4), 2)
+  t.end()
+})

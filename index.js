@@ -73,7 +73,7 @@ exports.index = function (depth, offset) {
 
 exports.offset = function (index, depth) {
   if (index % 2 === 0) return index / 2
-  if (!depth) depth = exports.depth(depth)
+  if (!depth) depth = exports.depth(index)
 
   return ((index + 1) / (1 << depth) - 1) / 2
 }
