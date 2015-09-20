@@ -67,6 +67,28 @@ exports.children = function (index, depth) {
   ]
 }
 
+exports.leftSpan = function (index, depth) {
+  if (index % 2 === 0) return index
+  if (!depth) depth = exports.depth(index)
+  return exports.offset(index, depth) * (2 << depth)
+}
+
+exports.rightSpan = function (index, depth) {
+  if (index % 2 === 0) return index
+  if (!depth) depth = exports.depth(index)
+  return (exports.offset(index, depth) + 1) * (2 << depth) - 2
+}
+
+exports.spans = function (index, depth) {
+  if (index % 2 === 0) return [index, index]
+  if (!depth) depth = exports.depth(index)
+
+  var offset = exports.offset(index, depth)
+  var width = 2 << depth
+
+  return [offset * width, (offset + 1) * width - 2]
+}
+
 exports.index = function (depth, offset) {
   return (1 + 2 * offset) * (1 << depth) - 1
 }

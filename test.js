@@ -77,3 +77,30 @@ tape('offsets', function (t) {
   t.same(feed.offset(4), 2)
   t.end()
 })
+
+tape('spans', function (t) {
+  t.same(feed.spans(0), [0, 0])
+  t.same(feed.spans(1), [0, 2])
+  t.same(feed.spans(3), [0, 6])
+  t.same(feed.spans(23), [16, 30])
+  t.same(feed.spans(27), [24, 30])
+  t.end()
+})
+
+tape('leftSpan', function (t) {
+  t.same(feed.leftSpan(0), 0)
+  t.same(feed.leftSpan(1), 0)
+  t.same(feed.leftSpan(3), 0)
+  t.same(feed.leftSpan(23), 16)
+  t.same(feed.leftSpan(27), 24)
+  t.end()
+})
+
+tape('rightSpan', function (t) {
+  t.same(feed.rightSpan(0), 0)
+  t.same(feed.rightSpan(1), 2)
+  t.same(feed.rightSpan(3), 6)
+  t.same(feed.rightSpan(23), 30)
+  t.same(feed.rightSpan(27), 30)
+  t.end()
+})

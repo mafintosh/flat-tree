@@ -53,6 +53,11 @@ Returns the index of this elements sibling
 Returns an array `[leftChild, rightChild]` with the indexes of this elements children.
 If this element does not have any children it returns `null`
 
+#### `range = tree.spans(index)`
+
+Returns the range (inclusive) the tree root at `index` spans.
+For example `tree.spans(3)` would return `[0, 6]` (see the usage example).
+
 #### `depth = tree.depth(index)`
 
 Returns the depth of an element
