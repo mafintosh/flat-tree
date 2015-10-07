@@ -104,3 +104,17 @@ tape('rightSpan', function (t) {
   t.same(feed.rightSpan(27), 30)
   t.end()
 })
+
+tape('parent > int32', function (t) {
+  t.same(feed.parent(10000000000), 10000000001)
+  t.end()
+})
+
+tape('child to parent to child', function (t) {
+  var child = 0
+  for (var i = 0; i < 50; i++) child = feed.parent(child)
+  t.same(child, 1125899906842623)
+  for (var j = 0; j < 50; j++) child = feed.leftChild(child)
+  t.same(child, 0)
+  t.end()
+})
