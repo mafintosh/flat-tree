@@ -79,6 +79,14 @@ exports.rightSpan = function (index, depth) {
   return (exports.offset(index, depth) + 1) * twoPow(depth + 1) - 2
 }
 
+exports.count = function (index, depth) {
+  if (!(index & 1)) return 1
+  if (!depth) depth = exports.depth(index)
+
+  var offset = exports.offset(index, depth)
+  return twoPow(depth + 1) - 1
+}
+
 exports.spans = function (index, depth) {
   if (!(index & 1)) return [index, index]
   if (!depth) depth = exports.depth(index)

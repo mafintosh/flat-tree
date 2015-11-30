@@ -58,6 +58,10 @@ If this element does not have any children it returns `null`
 Returns the range (inclusive) the tree root at `index` spans.
 For example `tree.spans(3)` would return `[0, 6]` (see the usage example).
 
+#### `count = tree.count(index)`
+
+Returns how many nodes (including parent nodes) a tree contains
+
 #### `depth = tree.depth(index)`
 
 Returns the depth of an element

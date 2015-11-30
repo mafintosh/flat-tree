@@ -105,6 +105,16 @@ tape('rightSpan', function (t) {
   t.end()
 })
 
+tape('count', function (t) {
+  t.same(feed.count(0), 1)
+  t.same(feed.count(1), 3)
+  t.same(feed.count(3), 7)
+  t.same(feed.count(5), 3)
+  t.same(feed.count(23), 15)
+  t.same(feed.count(27), 7)
+  t.end()
+})
+
 tape('parent > int32', function (t) {
   t.same(feed.parent(10000000000), 10000000001)
   t.end()
