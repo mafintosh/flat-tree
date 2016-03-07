@@ -1,9 +1,9 @@
-exports.fullRoots = function (index) {
+exports.fullRoots = function (index, result) {
   if (index & 1) throw new Error('You can only look up roots for depth(0) blocks')
+  if (!result) result = []
 
   index /= 2
 
-  var result = []
   var offset = 0
   var factor = 1
 
