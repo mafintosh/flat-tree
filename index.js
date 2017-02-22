@@ -29,15 +29,15 @@ exports.depth = function (index) {
   return depth
 }
 
-exports.sibling = function (index) {
-  var depth = exports.depth(index)
+exports.sibling = function (index, depth) {
+  if (!depth) depth = exports.depth(index)
   var offset = exports.offset(index, depth)
 
   return exports.index(depth, offset & 1 ? offset - 1 : offset + 1)
 }
 
-exports.parent = function (index) {
-  var depth = exports.depth(index)
+exports.parent = function (index, depth) {
+  if (!depth) depth = exports.depth(index)
   var offset = exports.offset(index, depth)
 
   return exports.index(depth + 1, rightShift(offset))
