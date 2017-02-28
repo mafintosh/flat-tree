@@ -143,3 +143,17 @@ tape('iterator', function (t) {
 
   t.end()
 })
+
+tape('iterator, non-leaf start', function (t) {
+  var iterator = feed.iterator(1)
+
+  t.same(iterator.index, 1)
+  t.same(iterator.parent(), 3)
+  t.same(iterator.parent(), 7)
+  t.same(iterator.rightChild(), 11)
+  t.same(iterator.leftChild(), 9)
+  t.same(iterator.next(), 13)
+  t.same(iterator.leftSpan(), 12)
+
+  t.end()
+})
