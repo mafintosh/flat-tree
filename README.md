@@ -84,6 +84,55 @@ Returns a list of all the full roots (subtrees where all nodes have either 2 or 
 For example `fullRoots(8)` returns `[3]` since the subtree rooted at `3` spans `0 -> 6` and the tree
 rooted at `7` has a child located at `9` which is `>= 8`.
 
+#### `iterator = tree.iterator(index)`
+
+Create a stateful tree iterator starting at a given index.
+The iterator exposes the following methods.
+
+#### `index = iterator.next()`
+
+Move the iterator the next item in the tree.
+
+#### `index = iterator.prev()
+
+Move the iterator the prev item in the tree.
+
+#### `iterator.seek(index)`
+
+Move the iterator the this specific tree index.
+
+#### `index = iterator.parent()`
+
+Move the iterator to the current parent index
+
+#### `index = iterator.leftChild()`
+
+Move the iterator to the current left child index.
+
+#### `index = iterator.rightChild()`
+
+Move the iterator to the current right child index.
+
+#### `index = iterator.leftSpan()`
+
+Move the iterator to the current left span index.
+
+#### `index = iterator.rightSpan()`
+
+Move the iterator to the current right span index.
+
+#### `bool = iterator.isLeft()`
+
+Is the iterator at a left sibling?
+
+#### `bool = iterator.isRight()`
+
+Is the iterator at a right sibling?
+
+#### `index = iterator.sibling()`
+
+Move the iterator to the current sibling
+
 ## License
 
 MIT

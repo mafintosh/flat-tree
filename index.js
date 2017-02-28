@@ -108,10 +108,100 @@ exports.offset = function (index, depth) {
   return ((index + 1) / twoPow(depth) - 1) / 2
 }
 
+exports.iterator = function (index) {
+  var ite = new Iterator()
+  ite.seek(index || 0)
+  return ite
+}
+
 function twoPow (n) {
   return n < 31 ? 1 << n : ((1 << 30) * (1 << (n - 30)))
 }
 
 function rightShift (n) {
   return (n - (n & 1)) / 2
+}
+
+function Iterator (index) {
+  this.index = 0
+  this.offset = 0
+  this.factor = 0
+}
+
+Iterator.prototype.seek = function (index) {
+  this.index = index
+  if (this.index & 1) {
+    this.offset = exports.offset(index)
+    this.factor = twoPow(exports.depth(index) + 1)
+  } else {
+    this.offset = index / 2
+    this.factor = 2
+  }
+}
+
+Iterator.prototype.isLeft = function () {
+  return !(this.offset & 1)
+}
+
+Iterator.prototype.isRight = function () {
+  return !this.isLeft()
+}
+
+Iterator.prototype.prev = function () {
+  if (!this.offset) return this.index
+  this.offset--
+  this.index -= this.factor
+  return this.index
+}
+
+Iterator.prototype.next = function () {
+  this.offset++
+  this.index += this.factor
+  return this.index
+}
+
+Iterator.prototype.sibling = function () {
+  return this.isLeft() ? this.next() : this.prev()
+}
+
+Iterator.prototype.parent = function () {
+  if (this.offset & 1) {
+    this.index -= this.factor / 2
+    this.offset = (this.offset - 1) / 2
+  } else {
+    this.index += this.factor / 2
+    this.offset /= 2
+  }
+  this.factor *= 2
+  return this.index
+}
+
+Iterator.prototype.leftSpan = function () {
+  this.index = this.index - this.factor / 2 + 1
+  this.offset = this.index / 2
+  this.factor = 2
+  return this.index
+}
+
+Iterator.prototype.rightSpan = function () {
+  this.index = this.index + this.factor / 2 - 1
+  this.offset = this.index / 2
+  this.factor = 2
+  return this.index
+}
+
+Iterator.prototype.leftChild = function () {
+  if (this.factor === 2) return this.index
+  this.factor /= 2
+  this.index -= this.factor / 2
+  this.offset *= 2
+  return this.index
+}
+
+Iterator.prototype.rightChild = function () {
+  if (this.factor === 2) return this.index
+  this.factor /= 2
+  this.index += this.factor / 2
+  this.offset = 2 * this.offset + 1
+  return this.index
 }

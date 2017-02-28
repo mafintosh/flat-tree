@@ -128,3 +128,18 @@ tape('child to parent to child', function (t) {
   t.same(child, 0)
   t.end()
 })
+
+tape('iterator', function (t) {
+  var iterator = feed.iterator()
+
+  t.same(iterator.index, 0)
+  t.same(iterator.parent(), 1)
+  t.same(iterator.parent(), 3)
+  t.same(iterator.parent(), 7)
+  t.same(iterator.rightChild(), 11)
+  t.same(iterator.leftChild(), 9)
+  t.same(iterator.next(), 13)
+  t.same(iterator.leftSpan(), 12)
+
+  t.end()
+})
