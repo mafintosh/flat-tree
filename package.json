@@ -3,6 +3,7 @@
   "version": "1.6.0",
   "description": "A series of functions to map a binary tree to a list",
   "main": "index.js",
+  "module": "flat-tree.js",
   "dependencies": {},
   "devDependencies": {
     "standard": "^8.6.0",
