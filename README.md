@@ -136,7 +136,7 @@ Move the iterator to the current sibling
 ## See also
 
 - [mafintosh/flat-tree-rs][rs]: A port of the node module to rust.
-- [mafintosh/print-flat-tree][print]: A node cli that can pretty print flat-trees.
+- [mafintosh/print-flat-tree][print]: A cli that can pretty print flat-trees.
 - [bcomnes/flattree][ftg]: A port of the node module to Go.
 
 ## License
