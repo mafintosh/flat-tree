@@ -145,5 +145,5 @@ MIT
 
 [print]: https://github.com/mafintosh/print-flat-tree
 [rs]: https://github.com/mafintosh/flat-tree-rs
-[go]: https://github.com/bcomnes/flattree
+[ftg]: https://github.com/bcomnes/flattree
 
