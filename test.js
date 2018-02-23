@@ -24,6 +24,7 @@ tape('children', function (t) {
   t.same(feed.children(0), null)
   t.same(feed.children(1), [0, 2])
   t.same(feed.children(3), [1, 5])
+  t.same(feed.children(9), [8, 10])
   t.end()
 })
 
