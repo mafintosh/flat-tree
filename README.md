@@ -93,7 +93,7 @@ The iterator exposes the following methods.
 
 Move the iterator the next item in the tree.
 
-#### `index = iterator.prev()
+#### `index = iterator.prev()`
 
 Move the iterator the prev item in the tree.
 
@@ -135,7 +135,7 @@ Move the iterator to the current sibling
 
 ## See also
 
-- [mafintosh/flat-tree-rs][rs]: A port of the node module to rust.
+- [datrs/flat-tree][rs]: A port of the node module to rust.
 - [mafintosh/print-flat-tree][print]: A cli that can pretty print flat-trees.
 - [bcomnes/flattree][ftg]: A port of the node module to Go.
 
@@ -144,6 +144,6 @@ Move the iterator to the current sibling
 MIT
 
 [print]: https://github.com/mafintosh/print-flat-tree
-[rs]: https://github.com/mafintosh/flat-tree-rs
+[rs]: https://github.com/datrs/flat-tree
 [ftg]: https://github.com/bcomnes/flattree
 
