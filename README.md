@@ -48,6 +48,14 @@ Returns the index of the parent element in tree
 
 Returns the index of this elements sibling
 
+#### `leftChildIndex = tree.leftChild(index)`
+
+Returns the index of the left child.
+
+#### `rightChildIndex = tree.rightChild(index)`
+
+Returns the index of the right child.
+
 #### `children = tree.children(index)`
 
 Returns an array `[leftChild, rightChild]` with the indexes of this elements children.
@@ -60,11 +68,11 @@ For example `tree.spans(3)` would return `[0, 6]` (see the usage example).
 
 #### `index = tree.leftSpan(index)`
 
-Returns the left spanning in index in the tree `index` spans.
+Returns the left spanning index in the tree `index` spans.
 
 #### `index = tree.rightSpan(index)`
 
-Returns the right spanning in index in the tree `index` spans.
+Returns the right spanning index in the tree `index` spans.
 
 #### `count = tree.count(index)`
 
