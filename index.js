@@ -138,11 +138,19 @@ Iterator.prototype.seek = function (index) {
 }
 
 Iterator.prototype.isLeft = function () {
-  return !(this.offset & 1)
+  return (this.offset & 1) === 0
 }
 
 Iterator.prototype.isRight = function () {
-  return !this.isLeft()
+  return (this.offset & 1) === 1
+}
+
+Iterator.prototype.contains = function (index) {
+  return index > this.index
+    ? index < (this.index + this.factor / 2)
+    : index < this.index
+      ? index > (this.index - this.factor / 2)
+      : true
 }
 
 Iterator.prototype.prev = function () {
