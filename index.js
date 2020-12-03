@@ -120,7 +120,7 @@ function rightShift (n) {
   return (n - (n & 1)) / 2
 }
 
-function Iterator (index) {
+function Iterator () {
   this.index = 0
   this.offset = 0
   this.factor = 0
