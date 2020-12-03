@@ -211,3 +211,32 @@ Iterator.prototype.rightChild = function () {
   this.offset = 2 * this.offset + 1
   return this.index
 }
+
+Iterator.prototype.nextTree = function () {
+  this.index = this.index + this.factor / 2 + 1
+  this.offset = this.index / 2
+  this.factor = 2
+  return this.index
+}
+
+Iterator.prototype.prevTree = function () {
+  if (!this.offset) {
+    this.index = 0
+    this.factor = 2
+  } else {
+    this.index = this.index - this.factor / 2 - 1
+    this.offset = this.index / 2
+    this.factor = 2
+  }
+  return this.index
+}
+
+Iterator.prototype.fullRoot = function (index) {
+  if (index <= this.index || (this.index & 1) > 0) return false
+  while (index > this.index + this.factor + this.factor / 2) {
+    this.index += this.factor / 2
+    this.factor *= 2
+    this.offset /= 2
+  }
+  return true
+}

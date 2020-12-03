@@ -158,3 +158,45 @@ tape('iterator, non-leaf start', function (t) {
 
   t.end()
 })
+
+tape('iterator, full root', function (t) {
+  var iterator = feed.iterator(0)
+
+  t.same(iterator.fullRoot(0), false)
+
+  t.same(iterator.fullRoot(22), true)
+  t.same(iterator.index, 7)
+
+  t.same(iterator.nextTree(), 16)
+
+  t.same(iterator.fullRoot(22), true)
+  t.same(iterator.index, 17)
+
+  t.same(iterator.nextTree(), 20)
+
+  t.same(iterator.fullRoot(22), true)
+  t.same(iterator.index, 20)
+
+  t.same(iterator.nextTree(), 22)
+  t.same(iterator.fullRoot(22), false)
+
+  t.end()
+})
+
+tape('iterator, full root, 10 big random trees', function (t) {
+  for (var i = 0; i < 10; i++) {
+    var iterator = feed.iterator(0)
+    var tree = Math.floor(Math.random() * 0xffffffff) * 2
+    var expected = feed.fullRoots(tree)
+    var actual = []
+
+    for (; iterator.fullRoot(tree); iterator.nextTree()) {
+      actual.push(iterator.index)
+    }
+
+    t.same(actual, expected)
+    t.same(iterator.fullRoot(tree), false)
+  }
+
+  t.end()
+})
