@@ -116,6 +116,18 @@ tape('count', function (t) {
   t.end()
 })
 
+tape('countLeaves', function (t) {
+  t.same(feed.countLeaves(0), 1)
+  t.same(feed.countLeaves(1), 2)
+  t.same(feed.countLeaves(2), 1)
+  t.same(feed.countLeaves(3), 4)
+  t.same(feed.countLeaves(4), 1)
+  t.same(feed.countLeaves(5), 2)
+  t.same(feed.countLeaves(23), 8)
+  t.same(feed.countLeaves(27), 4)
+  t.end()
+})
+
 tape('parent > int32', function (t) {
   t.same(feed.parent(10000000000), 10000000001)
   t.end()
@@ -198,5 +210,27 @@ tape('iterator, full root, 10 big random trees', function (t) {
     t.same(iterator.fullRoot(tree), false)
   }
 
+  t.end()
+})
+
+tape('iterator, count', function (t) {
+  t.same(feed.iterator(0).count(), 1)
+  t.same(feed.iterator(1).count(), 3)
+  t.same(feed.iterator(3).count(), 7)
+  t.same(feed.iterator(5).count(), 3)
+  t.same(feed.iterator(23).count(), 15)
+  t.same(feed.iterator(27).count(), 7)
+  t.end()
+})
+
+tape('iterator, countLeaves', function (t) {
+  t.same(feed.iterator(0).countLeaves(), 1)
+  t.same(feed.iterator(1).countLeaves(), 2)
+  t.same(feed.iterator(2).countLeaves(), 1)
+  t.same(feed.iterator(3).countLeaves(), 4)
+  t.same(feed.iterator(4).countLeaves(), 1)
+  t.same(feed.iterator(5).countLeaves(), 2)
+  t.same(feed.iterator(23).countLeaves(), 8)
+  t.same(feed.iterator(27).countLeaves(), 4)
   t.end()
 })
