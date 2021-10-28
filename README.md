@@ -38,20 +38,20 @@ list[tree.parent(i)] = 'parent of a and b'
 
 #### `index = tree.index(depth, offset)`
 
-Returns an array index for the tree element at the given depth and offset
+Returns an array index for the tree element at the given depth and offset.
 
 #### `parentIndex = tree.parent(index)`
 
-Returns the index of the parent element in tree
+Returns the index of the parent element in tree.
 
 #### `siblingIndex = tree.sibling(index)`
 
-Returns the index of this elements sibling
+Returns the index of this elements sibling.
 
 #### `children = tree.children(index)`
 
 Returns an array `[leftChild, rightChild]` with the indexes of this elements children.
-If this element does not have any children it returns `null`
+If this element does not have any children it returns `null`.
 
 #### `range = tree.spans(index)`
 
@@ -68,15 +68,19 @@ Returns the right spanning in index in the tree `index` spans.
 
 #### `count = tree.count(index)`
 
-Returns how many nodes (including parent nodes) a tree contains
+Returns how many nodes (including parent nodes) a tree contains.
+
+#### `count = tree.countLeaves(index)`
+
+Returns how many nodes (excluding parent nodes) a tree contains.
 
 #### `depth = tree.depth(index)`
 
-Returns the depth of an element
+Returns the depth of an element.
 
 #### `offset = tree.offset(index, [depth])`
 
-Returns the relative offset of an element
+Returns the relative offset of an element.
 
 #### `roots = tree.fullRoots(index)`
 
@@ -103,7 +107,7 @@ Move the iterator the this specific tree index.
 
 #### `index = iterator.parent()`
 
-Move the iterator to the current parent index
+Move the iterator to the current parent index.
 
 #### `index = iterator.leftChild()`
 
@@ -131,7 +135,7 @@ Is the iterator at a right sibling?
 
 #### `index = iterator.sibling()`
 
-Move the iterator to the current sibling
+Move the iterator to the current sibling.
 
 ## See also
 

@@ -85,6 +85,10 @@ exports.count = function (index, depth) {
   return twoPow(depth + 1) - 1
 }
 
+exports.countLeaves = function (index) {
+  return (exports.count(index) + 1) / 2
+}
+
 exports.spans = function (index, depth) {
   if (!(index & 1)) return [index, index]
   if (!depth) depth = exports.depth(index)

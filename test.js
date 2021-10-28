@@ -116,6 +116,18 @@ tape('count', function (t) {
   t.end()
 })
 
+tape('countLeaves', function (t) {
+  t.same(feed.countLeaves(0), 1)
+  t.same(feed.countLeaves(1), 2)
+  t.same(feed.countLeaves(2), 1)
+  t.same(feed.countLeaves(3), 4)
+  t.same(feed.countLeaves(4), 1)
+  t.same(feed.countLeaves(5), 2)
+  t.same(feed.countLeaves(23), 8)
+  t.same(feed.countLeaves(27), 4)
+  t.end()
+})
+
 tape('parent > int32', function (t) {
   t.same(feed.parent(10000000000), 10000000001)
   t.end()
