@@ -212,3 +212,25 @@ tape('iterator, full root, 10 big random trees', function (t) {
 
   t.end()
 })
+
+tape('iterator, count', function (t) {
+  t.same(feed.iterator(0).count(), 1)
+  t.same(feed.iterator(1).count(), 3)
+  t.same(feed.iterator(3).count(), 7)
+  t.same(feed.iterator(5).count(), 3)
+  t.same(feed.iterator(23).count(), 15)
+  t.same(feed.iterator(27).count(), 7)
+  t.end()
+})
+
+tape('iterator, countLeaves', function (t) {
+  t.same(feed.iterator(0).countLeaves(), 1)
+  t.same(feed.iterator(1).countLeaves(), 2)
+  t.same(feed.iterator(2).countLeaves(), 1)
+  t.same(feed.iterator(3).countLeaves(), 4)
+  t.same(feed.iterator(4).countLeaves(), 1)
+  t.same(feed.iterator(5).countLeaves(), 2)
+  t.same(feed.iterator(23).countLeaves(), 8)
+  t.same(feed.iterator(27).countLeaves(), 4)
+  t.end()
+})

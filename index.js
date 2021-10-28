@@ -170,6 +170,15 @@ Iterator.prototype.next = function () {
   return this.index
 }
 
+Iterator.prototype.count = function () {
+  if (!(this.index & 1)) return 1
+  return this.factor - 1
+}
+
+Iterator.prototype.countLeaves = function () {
+  return (this.count() + 1) / 2
+}
+
 Iterator.prototype.sibling = function () {
   return this.isLeft() ? this.next() : this.prev()
 }

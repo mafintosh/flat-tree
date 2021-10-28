@@ -137,6 +137,14 @@ Is the iterator at a right sibling?
 
 Move the iterator to the current sibling.
 
+#### `count = iterator.count()`
+
+Returns how many nodes (including parent nodes) the current tree contains.
+
+#### `count = iterator.countLeaves()`
+
+Returns how many nodes (excluding parent nodes) the current tree contains.
+
 ## See also
 
 - [mafintosh/print-flat-tree][print]: A cli that can pretty print flat-trees.
