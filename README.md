@@ -154,6 +154,7 @@ Returns how many nodes (excluding parent nodes) the current tree contains.
 - [datrs/flat-tree][rs]: A port to Rust.
 - [bcomnes/flattree][ftg]: A port to Go.
 - [noffle/cl-flat-tree][clft]: A port to Common Lisp.
+- [dukeraphaelng/flat_tree][cr]: A port to Crystal.
 
 ## License
 
