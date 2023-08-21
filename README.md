@@ -166,3 +166,4 @@ MIT
 [c]: https://github.com/arablocks/flat-tree.c
 [kt]: https://github.com/datkt/flat-tree
 [clft]: https://github.com/noffle/cl-flat-tree
+[cr]: https://github.com/dukeraphaelng/flat_tree
