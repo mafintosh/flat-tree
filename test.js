@@ -61,6 +61,42 @@ tape('fullRoots', function (t) {
   t.end()
 })
 
+tape('futureRoots', function (t) {
+  t.same(feed.futureRoots(0), [])
+  t.same(feed.futureRoots(2), [])
+  t.same(feed.futureRoots(4), [3])
+  t.same(feed.futureRoots(6), [])
+  t.same(feed.futureRoots(8), [7])
+  t.same(feed.futureRoots(10), [7])
+  t.same(feed.futureRoots(12), [7, 11])
+  t.same(feed.futureRoots(14), [])
+  t.same(feed.futureRoots(16), [15])
+  t.same(feed.futureRoots(18), [15])
+  t.same(feed.futureRoots(20), [15, 19])
+  t.same(feed.futureRoots(22), [15])
+  t.same(feed.futureRoots(24), [15, 23])
+  t.same(feed.futureRoots(26), [15, 23])
+  t.same(feed.futureRoots(28), [15, 23, 27])
+  t.same(feed.futureRoots(30), [])
+  t.same(feed.futureRoots(32), [31])
+  t.end()
+})
+
+tape('futureRoots with a big random trees', function (t) {
+  for (let i = 0; i < 5; i++) {
+    const n = Math.floor(Math.random() * 10000) * 2
+    const roots = feed.futureRoots(n)
+    const brute = []
+
+    for (let i = 0; i < n; i++) {
+      if (feed.rightSpan(i) > n) brute.push(i)
+    }
+
+    t.same(roots, brute)
+  }
+  t.end()
+})
+
 tape('depths', function (t) {
   t.same(feed.depth(0), 0)
   t.same(feed.depth(1), 1)

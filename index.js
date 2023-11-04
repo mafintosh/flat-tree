@@ -17,6 +17,38 @@ exports.fullRoots = function (index, result) {
   }
 }
 
+exports.futureRoots = function (index, result) {
+  if (index & 1) throw new Error('You can only look up future roots for depth(0) blocks')
+  if (!result) result = []
+
+  var offset = 0
+  var factor = 1
+
+  // make first root
+  while (factor * 2 <= index) factor *= 2
+
+  // full factor of 2 - done
+  if (factor * 2 - 2 === index) return result
+
+  var pos = factor / 2 - 1
+
+  // while its not a full tree
+  while ((pos + factor / 2 - 1) !== index) {
+    pos += factor
+
+    // read too far, to to left child
+    while ((pos + factor / 2 - 1) > index) {
+      factor /= 2
+      pos -= factor / 2
+    }
+
+    // the "gap" is a future root
+    result.push(pos - factor / 2)
+  }
+
+  return result
+}
+
 exports.depth = function (index) {
   var depth = 0
 
