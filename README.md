@@ -6,8 +6,6 @@ A series of functions to map a binary tree to a list
 npm install flat-tree
 ```
 
-[![build status](http://img.shields.io/travis/mafintosh/flat-tree.svg?style=flat)](http://travis-ci.org/mafintosh/flat-tree)
-
 ## Usage
 
 You can represent a binary tree in a simple flat list using the following structure
