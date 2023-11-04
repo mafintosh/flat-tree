@@ -1,272 +1,242 @@
-var tape = require('tape')
-var feed = require('./')
+const test = require('brittle')
+const flat = require('./')
 
-tape('base blocks', function (t) {
-  t.same(feed.index(0, 0), 0)
-  t.same(feed.index(0, 1), 2)
-  t.same(feed.index(0, 2), 4)
-  t.end()
+test('base blocks', function (t) {
+  t.is(flat.index(0, 0), 0)
+  t.is(flat.index(0, 1), 2)
+  t.is(flat.index(0, 2), 4)
 })
 
-tape('parents', function (t) {
-  t.same(feed.index(1, 0), 1)
-  t.same(feed.index(1, 1), 5)
-  t.same(feed.index(2, 0), 3)
+test('parents', function (t) {
+  t.is(flat.index(1, 0), 1)
+  t.is(flat.index(1, 1), 5)
+  t.is(flat.index(2, 0), 3)
 
-  t.same(feed.parent(0), 1)
-  t.same(feed.parent(2), 1)
-  t.same(feed.parent(1), 3)
-
-  t.end()
+  t.is(flat.parent(0), 1)
+  t.is(flat.parent(2), 1)
+  t.is(flat.parent(1), 3)
 })
 
-tape('children', function (t) {
-  t.same(feed.children(0), null)
-  t.same(feed.children(1), [0, 2])
-  t.same(feed.children(3), [1, 5])
-  t.same(feed.children(9), [8, 10])
-  t.end()
+test('children', function (t) {
+  t.is(flat.children(0), null)
+  t.alike(flat.children(1), [0, 2])
+  t.alike(flat.children(3), [1, 5])
+  t.alike(flat.children(9), [8, 10])
 })
 
-tape('leftChild', function (t) {
-  t.same(feed.leftChild(0), -1)
-  t.same(feed.leftChild(1), 0)
-  t.same(feed.leftChild(3), 1)
-  t.end()
+test('leftChild', function (t) {
+  t.is(flat.leftChild(0), -1)
+  t.is(flat.leftChild(1), 0)
+  t.is(flat.leftChild(3), 1)
 })
 
-tape('rightChild', function (t) {
-  t.same(feed.rightChild(0), -1)
-  t.same(feed.rightChild(1), 2)
-  t.same(feed.rightChild(3), 5)
-  t.end()
+test('rightChild', function (t) {
+  t.is(flat.rightChild(0), -1)
+  t.is(flat.rightChild(1), 2)
+  t.is(flat.rightChild(3), 5)
 })
 
-tape('siblings', function (t) {
-  t.same(feed.sibling(0), 2)
-  t.same(feed.sibling(2), 0)
-  t.same(feed.sibling(1), 5)
-  t.same(feed.sibling(5), 1)
-
-  t.end()
+test('siblings', function (t) {
+  t.is(flat.sibling(0), 2)
+  t.is(flat.sibling(2), 0)
+  t.is(flat.sibling(1), 5)
+  t.is(flat.sibling(5), 1)
 })
 
-tape('fullRoots', function (t) {
-  t.same(feed.fullRoots(0), [])
-  t.same(feed.fullRoots(2), [0])
-  t.same(feed.fullRoots(8), [3])
-  t.same(feed.fullRoots(20), [7, 17])
-  t.same(feed.fullRoots(18), [7, 16])
-  t.same(feed.fullRoots(16), [7])
-  t.end()
+test('fullRoots', function (t) {
+  t.alike(flat.fullRoots(0), [])
+  t.alike(flat.fullRoots(2), [0])
+  t.alike(flat.fullRoots(8), [3])
+  t.alike(flat.fullRoots(20), [7, 17])
+  t.alike(flat.fullRoots(18), [7, 16])
+  t.alike(flat.fullRoots(16), [7])
 })
 
-tape('futureRoots', function (t) {
-  t.same(feed.futureRoots(0), [])
-  t.same(feed.futureRoots(2), [])
-  t.same(feed.futureRoots(4), [3])
-  t.same(feed.futureRoots(6), [])
-  t.same(feed.futureRoots(8), [7])
-  t.same(feed.futureRoots(10), [7])
-  t.same(feed.futureRoots(12), [7, 11])
-  t.same(feed.futureRoots(14), [])
-  t.same(feed.futureRoots(16), [15])
-  t.same(feed.futureRoots(18), [15])
-  t.same(feed.futureRoots(20), [15, 19])
-  t.same(feed.futureRoots(22), [15])
-  t.same(feed.futureRoots(24), [15, 23])
-  t.same(feed.futureRoots(26), [15, 23])
-  t.same(feed.futureRoots(28), [15, 23, 27])
-  t.same(feed.futureRoots(30), [])
-  t.same(feed.futureRoots(32), [31])
-  t.end()
+test('futureRoots', function (t) {
+  t.alike(flat.futureRoots(0), [])
+  t.alike(flat.futureRoots(2), [])
+  t.alike(flat.futureRoots(4), [3])
+  t.alike(flat.futureRoots(6), [])
+  t.alike(flat.futureRoots(8), [7])
+  t.alike(flat.futureRoots(10), [7])
+  t.alike(flat.futureRoots(12), [7, 11])
+  t.alike(flat.futureRoots(14), [])
+  t.alike(flat.futureRoots(16), [15])
+  t.alike(flat.futureRoots(18), [15])
+  t.alike(flat.futureRoots(20), [15, 19])
+  t.alike(flat.futureRoots(22), [15])
+  t.alike(flat.futureRoots(24), [15, 23])
+  t.alike(flat.futureRoots(26), [15, 23])
+  t.alike(flat.futureRoots(28), [15, 23, 27])
+  t.alike(flat.futureRoots(30), [])
+  t.alike(flat.futureRoots(32), [31])
 })
 
-tape('futureRoots with a big random trees', function (t) {
+test('futureRoots with a big random trees', function (t) {
   for (let i = 0; i < 5; i++) {
     const n = Math.floor(Math.random() * 10000) * 2
-    const roots = feed.futureRoots(n)
+    const roots = flat.futureRoots(n)
     const brute = []
 
     for (let i = 0; i < n; i++) {
-      if (feed.rightSpan(i) > n) brute.push(i)
+      if (flat.rightSpan(i) > n) brute.push(i)
     }
 
-    t.same(roots, brute)
+    t.alike(roots, brute)
   }
-  t.end()
 })
 
-tape('depths', function (t) {
-  t.same(feed.depth(0), 0)
-  t.same(feed.depth(1), 1)
-  t.same(feed.depth(2), 0)
-  t.same(feed.depth(3), 2)
-  t.same(feed.depth(4), 0)
-  t.end()
+test('depths', function (t) {
+  t.is(flat.depth(0), 0)
+  t.is(flat.depth(1), 1)
+  t.is(flat.depth(2), 0)
+  t.is(flat.depth(3), 2)
+  t.is(flat.depth(4), 0)
 })
 
-tape('offsets', function (t) {
-  t.same(feed.offset(0), 0)
-  t.same(feed.offset(1), 0)
-  t.same(feed.offset(2), 1)
-  t.same(feed.offset(3), 0)
-  t.same(feed.offset(4), 2)
-  t.end()
+test('offsets', function (t) {
+  t.is(flat.offset(0), 0)
+  t.is(flat.offset(1), 0)
+  t.is(flat.offset(2), 1)
+  t.is(flat.offset(3), 0)
+  t.is(flat.offset(4), 2)
 })
 
-tape('spans', function (t) {
-  t.same(feed.spans(0), [0, 0])
-  t.same(feed.spans(1), [0, 2])
-  t.same(feed.spans(3), [0, 6])
-  t.same(feed.spans(23), [16, 30])
-  t.same(feed.spans(27), [24, 30])
-  t.end()
+test('spans', function (t) {
+  t.alike(flat.spans(0), [0, 0])
+  t.alike(flat.spans(1), [0, 2])
+  t.alike(flat.spans(3), [0, 6])
+  t.alike(flat.spans(23), [16, 30])
+  t.alike(flat.spans(27), [24, 30])
 })
 
-tape('leftSpan', function (t) {
-  t.same(feed.leftSpan(0), 0)
-  t.same(feed.leftSpan(1), 0)
-  t.same(feed.leftSpan(3), 0)
-  t.same(feed.leftSpan(23), 16)
-  t.same(feed.leftSpan(27), 24)
-  t.end()
+test('leftSpan', function (t) {
+  t.is(flat.leftSpan(0), 0)
+  t.is(flat.leftSpan(1), 0)
+  t.is(flat.leftSpan(3), 0)
+  t.is(flat.leftSpan(23), 16)
+  t.is(flat.leftSpan(27), 24)
 })
 
-tape('rightSpan', function (t) {
-  t.same(feed.rightSpan(0), 0)
-  t.same(feed.rightSpan(1), 2)
-  t.same(feed.rightSpan(3), 6)
-  t.same(feed.rightSpan(23), 30)
-  t.same(feed.rightSpan(27), 30)
-  t.end()
+test('rightSpan', function (t) {
+  t.is(flat.rightSpan(0), 0)
+  t.is(flat.rightSpan(1), 2)
+  t.is(flat.rightSpan(3), 6)
+  t.is(flat.rightSpan(23), 30)
+  t.is(flat.rightSpan(27), 30)
 })
 
-tape('count', function (t) {
-  t.same(feed.count(0), 1)
-  t.same(feed.count(1), 3)
-  t.same(feed.count(3), 7)
-  t.same(feed.count(5), 3)
-  t.same(feed.count(23), 15)
-  t.same(feed.count(27), 7)
-  t.end()
+test('count', function (t) {
+  t.is(flat.count(0), 1)
+  t.is(flat.count(1), 3)
+  t.is(flat.count(3), 7)
+  t.is(flat.count(5), 3)
+  t.is(flat.count(23), 15)
+  t.is(flat.count(27), 7)
 })
 
-tape('countLeaves', function (t) {
-  t.same(feed.countLeaves(0), 1)
-  t.same(feed.countLeaves(1), 2)
-  t.same(feed.countLeaves(2), 1)
-  t.same(feed.countLeaves(3), 4)
-  t.same(feed.countLeaves(4), 1)
-  t.same(feed.countLeaves(5), 2)
-  t.same(feed.countLeaves(23), 8)
-  t.same(feed.countLeaves(27), 4)
-  t.end()
+test('countLeaves', function (t) {
+  t.is(flat.countLeaves(0), 1)
+  t.is(flat.countLeaves(1), 2)
+  t.is(flat.countLeaves(2), 1)
+  t.is(flat.countLeaves(3), 4)
+  t.is(flat.countLeaves(4), 1)
+  t.is(flat.countLeaves(5), 2)
+  t.is(flat.countLeaves(23), 8)
+  t.is(flat.countLeaves(27), 4)
 })
 
-tape('parent > int32', function (t) {
-  t.same(feed.parent(10000000000), 10000000001)
-  t.end()
+test('parent > int32', function (t) {
+  t.is(flat.parent(10000000000), 10000000001)
 })
 
-tape('child to parent to child', function (t) {
-  var child = 0
-  for (var i = 0; i < 50; i++) child = feed.parent(child)
-  t.same(child, 1125899906842623)
-  for (var j = 0; j < 50; j++) child = feed.leftChild(child)
-  t.same(child, 0)
-  t.end()
+test('child to parent to child', function (t) {
+  let child = 0
+  for (let i = 0; i < 50; i++) child = flat.parent(child)
+  t.is(child, 1125899906842623)
+  for (let j = 0; j < 50; j++) child = flat.leftChild(child)
+  t.is(child, 0)
 })
 
-tape('iterator', function (t) {
-  var iterator = feed.iterator()
+test('iterator', function (t) {
+  const iterator = flat.iterator()
 
-  t.same(iterator.index, 0)
-  t.same(iterator.parent(), 1)
-  t.same(iterator.parent(), 3)
-  t.same(iterator.parent(), 7)
-  t.same(iterator.rightChild(), 11)
-  t.same(iterator.leftChild(), 9)
-  t.same(iterator.next(), 13)
-  t.same(iterator.leftSpan(), 12)
-
-  t.end()
+  t.is(iterator.index, 0)
+  t.is(iterator.parent(), 1)
+  t.is(iterator.parent(), 3)
+  t.is(iterator.parent(), 7)
+  t.is(iterator.rightChild(), 11)
+  t.is(iterator.leftChild(), 9)
+  t.is(iterator.next(), 13)
+  t.is(iterator.leftSpan(), 12)
 })
 
-tape('iterator, non-leaf start', function (t) {
-  var iterator = feed.iterator(1)
+test('iterator, non-leaf start', function (t) {
+  const iterator = flat.iterator(1)
 
-  t.same(iterator.index, 1)
-  t.same(iterator.parent(), 3)
-  t.same(iterator.parent(), 7)
-  t.same(iterator.rightChild(), 11)
-  t.same(iterator.leftChild(), 9)
-  t.same(iterator.next(), 13)
-  t.same(iterator.leftSpan(), 12)
-
-  t.end()
+  t.is(iterator.index, 1)
+  t.is(iterator.parent(), 3)
+  t.is(iterator.parent(), 7)
+  t.is(iterator.rightChild(), 11)
+  t.is(iterator.leftChild(), 9)
+  t.is(iterator.next(), 13)
+  t.is(iterator.leftSpan(), 12)
 })
 
-tape('iterator, full root', function (t) {
-  var iterator = feed.iterator(0)
+test('iterator, full root', function (t) {
+  const iterator = flat.iterator(0)
 
-  t.same(iterator.fullRoot(0), false)
+  t.is(iterator.fullRoot(0), false)
 
-  t.same(iterator.fullRoot(22), true)
-  t.same(iterator.index, 7)
+  t.is(iterator.fullRoot(22), true)
+  t.is(iterator.index, 7)
 
-  t.same(iterator.nextTree(), 16)
+  t.is(iterator.nextTree(), 16)
 
-  t.same(iterator.fullRoot(22), true)
-  t.same(iterator.index, 17)
+  t.is(iterator.fullRoot(22), true)
+  t.is(iterator.index, 17)
 
-  t.same(iterator.nextTree(), 20)
+  t.is(iterator.nextTree(), 20)
 
-  t.same(iterator.fullRoot(22), true)
-  t.same(iterator.index, 20)
+  t.is(iterator.fullRoot(22), true)
+  t.is(iterator.index, 20)
 
-  t.same(iterator.nextTree(), 22)
-  t.same(iterator.fullRoot(22), false)
-
-  t.end()
+  t.is(iterator.nextTree(), 22)
+  t.is(iterator.fullRoot(22), false)
 })
 
-tape('iterator, full root, 10 big random trees', function (t) {
-  for (var i = 0; i < 10; i++) {
-    var iterator = feed.iterator(0)
-    var tree = Math.floor(Math.random() * 0xffffffff) * 2
-    var expected = feed.fullRoots(tree)
-    var actual = []
+test('iterator, full root, 10 big random trees', function (t) {
+  for (let i = 0; i < 10; i++) {
+    const iterator = flat.iterator(0)
+    const tree = Math.floor(Math.random() * 0xffffffff) * 2
+    const expected = flat.fullRoots(tree)
+    const actual = []
 
     for (; iterator.fullRoot(tree); iterator.nextTree()) {
       actual.push(iterator.index)
     }
 
-    t.same(actual, expected)
-    t.same(iterator.fullRoot(tree), false)
+    t.alike(actual, expected)
+    t.is(iterator.fullRoot(tree), false)
   }
-
-  t.end()
 })
 
-tape('iterator, count', function (t) {
-  t.same(feed.iterator(0).count(), 1)
-  t.same(feed.iterator(1).count(), 3)
-  t.same(feed.iterator(3).count(), 7)
-  t.same(feed.iterator(5).count(), 3)
-  t.same(feed.iterator(23).count(), 15)
-  t.same(feed.iterator(27).count(), 7)
-  t.end()
+test('iterator, count', function (t) {
+  t.is(flat.iterator(0).count(), 1)
+  t.is(flat.iterator(1).count(), 3)
+  t.is(flat.iterator(3).count(), 7)
+  t.is(flat.iterator(5).count(), 3)
+  t.is(flat.iterator(23).count(), 15)
+  t.is(flat.iterator(27).count(), 7)
 })
 
-tape('iterator, countLeaves', function (t) {
-  t.same(feed.iterator(0).countLeaves(), 1)
-  t.same(feed.iterator(1).countLeaves(), 2)
-  t.same(feed.iterator(2).countLeaves(), 1)
-  t.same(feed.iterator(3).countLeaves(), 4)
-  t.same(feed.iterator(4).countLeaves(), 1)
-  t.same(feed.iterator(5).countLeaves(), 2)
-  t.same(feed.iterator(23).countLeaves(), 8)
-  t.same(feed.iterator(27).countLeaves(), 4)
-  t.end()
+test('iterator, countLeaves', function (t) {
+  t.is(flat.iterator(0).countLeaves(), 1)
+  t.is(flat.iterator(1).countLeaves(), 2)
+  t.is(flat.iterator(2).countLeaves(), 1)
+  t.is(flat.iterator(3).countLeaves(), 4)
+  t.is(flat.iterator(4).countLeaves(), 1)
+  t.is(flat.iterator(5).countLeaves(), 2)
+  t.is(flat.iterator(23).countLeaves(), 8)
+  t.is(flat.iterator(27).countLeaves(), 4)
 })

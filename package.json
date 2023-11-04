@@ -5,11 +5,11 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "standard": "^14.3.4",
-    "tape": "^5.0.1"
+    "brittle": "^3.3.2",
+    "standard": "^17.1.0"
   },
   "scripts": {
-    "test": "standard && tape test.js"
+    "test": "standard && brittle test.js"
   },
   "repository": {
     "type": "git",

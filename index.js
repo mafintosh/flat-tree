@@ -4,8 +4,8 @@ exports.fullRoots = function (index, result) {
 
   index /= 2
 
-  var offset = 0
-  var factor = 1
+  let offset = 0
+  let factor = 1
 
   while (true) {
     if (!index) return result
@@ -21,7 +21,7 @@ exports.futureRoots = function (index, result) {
   if (index & 1) throw new Error('You can only look up future roots for depth(0) blocks')
   if (!result) result = []
 
-  var factor = 1
+  let factor = 1
 
   // make first root
   while (factor * 2 <= index) factor *= 2
@@ -29,7 +29,7 @@ exports.futureRoots = function (index, result) {
   // full factor of 2 - done
   if (factor * 2 - 2 === index) return result
 
-  var pos = factor / 2 - 1
+  let pos = factor / 2 - 1
 
   // while its not a full tree
   while ((pos + factor / 2 - 1) !== index) {
@@ -49,7 +49,7 @@ exports.futureRoots = function (index, result) {
 }
 
 exports.depth = function (index) {
-  var depth = 0
+  let depth = 0
 
   index += 1
   while (!(index & 1)) {
@@ -62,14 +62,14 @@ exports.depth = function (index) {
 
 exports.sibling = function (index, depth) {
   if (!depth) depth = exports.depth(index)
-  var offset = exports.offset(index, depth)
+  const offset = exports.offset(index, depth)
 
   return exports.index(depth, offset & 1 ? offset - 1 : offset + 1)
 }
 
 exports.parent = function (index, depth) {
   if (!depth) depth = exports.depth(index)
-  var offset = exports.offset(index, depth)
+  const offset = exports.offset(index, depth)
 
   return exports.index(depth + 1, rightShift(offset))
 }
@@ -90,7 +90,7 @@ exports.children = function (index, depth) {
   if (!(index & 1)) return null
 
   if (!depth) depth = exports.depth(index)
-  var offset = exports.offset(index, depth) * 2
+  const offset = exports.offset(index, depth) * 2
 
   return [
     exports.index(depth - 1, offset),
@@ -124,8 +124,8 @@ exports.spans = function (index, depth) {
   if (!(index & 1)) return [index, index]
   if (!depth) depth = exports.depth(index)
 
-  var offset = exports.offset(index, depth)
-  var width = twoPow(depth + 1)
+  const offset = exports.offset(index, depth)
+  const width = twoPow(depth + 1)
 
   return [offset * width, (offset + 1) * width - 2]
 }
@@ -142,7 +142,7 @@ exports.offset = function (index, depth) {
 }
 
 exports.iterator = function (index) {
-  var ite = new Iterator()
+  const ite = new Iterator()
   ite.seek(index || 0)
   return ite
 }
