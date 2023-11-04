@@ -21,7 +21,6 @@ exports.futureRoots = function (index, result) {
   if (index & 1) throw new Error('You can only look up future roots for depth(0) blocks')
   if (!result) result = []
 
-  var offset = 0
   var factor = 1
 
   // make first root
