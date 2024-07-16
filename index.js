@@ -110,6 +110,18 @@ exports.rightSpan = function (index, depth) {
   return (exports.offset(index, depth) + 1) * twoPow(depth + 1) - 2
 }
 
+exports.nextLeaf = function (index) {
+  let factor = 1
+  let r = index
+
+  while ((r & 1) === 1) {
+    r = (r - 1) / 2
+    factor *= 2
+  }
+
+  return index + factor + 1
+}
+
 exports.count = function (index, depth) {
   if (!(index & 1)) return 1
   if (!depth) depth = exports.depth(index)

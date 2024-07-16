@@ -146,6 +146,13 @@ test('countLeaves', function (t) {
   t.is(flat.countLeaves(27), 4)
 })
 
+test('nextLeaf', function (t) {
+  t.is(flat.nextLeaf(2), 4)
+  t.is(flat.nextLeaf(7), 16)
+  t.is(flat.nextLeaf(17), 20)
+  t.is(flat.nextLeaf(15), 32)
+})
+
 test('parent > int32', function (t) {
   t.is(flat.parent(10000000000), 10000000001)
 })
