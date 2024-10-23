@@ -48,6 +48,45 @@ exports.futureRoots = function (index, result) {
   return result
 }
 
+exports.patch = function (from, to) {
+  if (from === 0 || from >= to) return []
+
+  const roots = exports.fullRoots(from)
+  const target = exports.fullRoots(to)
+
+  // first find the first root that is different
+
+  let i = 0
+  for (; i < target.length; i++) {
+    if (i >= roots.length || roots[i] !== target[i]) break
+  }
+
+  // now we need to grow the newest root until it hits the diff one
+
+  let prev = roots.length - 1
+
+  const ite = exports.iterator(roots[prev--])
+  const patch = []
+
+  while (ite.index !== target[i]) {
+    ite.sibling()
+
+    if (prev >= 0 && ite.index === roots[prev]) {
+      prev--
+    } else {
+      patch.push(ite.index)
+    }
+
+    patch.push(ite.parent())
+  }
+
+  // include the rest
+
+  for (i++; i < target.length; i++) patch.push(target[i])
+
+  return patch
+}
+
 exports.depth = function (index) {
   let depth = 0
 

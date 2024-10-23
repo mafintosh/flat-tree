@@ -247,3 +247,10 @@ test('iterator, countLeaves', function (t) {
   t.is(flat.iterator(23).countLeaves(), 8)
   t.is(flat.iterator(27).countLeaves(), 4)
 })
+
+test('patch', function (t) {
+  t.alike(flat.patch(2, 4), [2, 1])
+  t.alike(flat.patch(2, 6), [2, 1, 4])
+  t.alike(flat.patch(2, 8), [2, 1, 5, 3])
+  t.alike(flat.patch(6, 8), [6, 5, 3])
+})
