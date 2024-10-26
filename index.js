@@ -61,6 +61,9 @@ exports.patch = function (from, to) {
     if (i >= roots.length || roots[i] !== target[i]) break
   }
 
+  // don't connect down to leaf
+  if (!(target[i] & 1)) i--
+
   // now we need to grow the newest root until it hits the diff one
 
   let prev = roots.length - 1
