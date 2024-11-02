@@ -254,4 +254,5 @@ test('patch', function (t) {
   t.alike(flat.patch(2, 8), [2, 1, 5, 3])
   t.alike(flat.patch(4, 6), [4])
   t.alike(flat.patch(6, 8), [6, 5, 3])
+  t.alike(flat.patch(8, 12), [9, 12])
 })
