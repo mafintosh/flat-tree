@@ -61,28 +61,32 @@ exports.patch = function (from, to) {
     if (i >= roots.length || roots[i] !== target[i]) break
   }
 
-  // now we need to grow the newest root until it hits the diff one
-
-  let prev = roots.length - 1
-
-  const ite = exports.iterator(roots[prev--])
   const patch = []
 
-  while (ite.index !== target[i]) {
-    ite.sibling()
+  if (i < roots.length) {
+    // now we need to grow the newest root until it hits the diff one
+    let prev = roots.length - 1
 
-    if (prev >= 0 && ite.index === roots[prev]) {
-      prev--
-    } else {
-      patch.push(ite.index)
+    const ite = exports.iterator(roots[prev--])
+
+    while (ite.index !== target[i]) {
+      ite.sibling()
+
+      if (prev >= 0 && ite.index === roots[prev]) {
+        prev--
+      } else {
+        patch.push(ite.index)
+      }
+
+      patch.push(ite.parent())
     }
 
-    patch.push(ite.parent())
+    i++ // patched to next root, so inc
   }
 
   // include the rest
 
-  for (i++; i < target.length; i++) patch.push(target[i])
+  for (; i < target.length; i++) patch.push(target[i])
 
   return patch
 }
