@@ -235,6 +235,19 @@ Iterator.prototype.isRight = function () {
   return (this.offset & 1) === 1
 }
 
+Iterator.prototype.isRoot = function (length) {
+  const currentLength = 1 + (this.index + this.factor / 2 - 1) / 2
+  if (length < currentLength) return false
+
+  const factor = this.factor * 2
+  const index = (this.offset & 1)
+    ? this.index - this.factor / 2
+    : this.index + this.factor / 2
+
+  const parentLength = 1 + (index + factor / 2 - 1) / 2
+  return parentLength > length
+}
+
 Iterator.prototype.contains = function (index) {
   return index > this.index
     ? index < (this.index + this.factor / 2)
@@ -288,11 +301,19 @@ Iterator.prototype.leftSpan = function () {
   return this.index
 }
 
+Iterator.prototype.peekLeftSpan = function () {
+  return this.index - this.factor / 2 + 1
+}
+
 Iterator.prototype.rightSpan = function () {
   this.index = this.index + this.factor / 2 - 1
   this.offset = this.index / 2
   this.factor = 2
   return this.index
+}
+
+Iterator.prototype.peekRightSpan = function () {
+  return this.index + this.factor / 2 - 1
 }
 
 Iterator.prototype.leftChild = function () {

@@ -255,3 +255,44 @@ test('patch', function (t) {
   t.alike(flat.patch(6, 8), [6, 5, 3])
   t.alike(flat.patch(8, 12), [9])
 })
+
+test('isRoot', function (t) {
+  {
+    const ite = flat.iterator(1)
+
+    t.absent(ite.isRoot(0))
+    t.absent(ite.isRoot(1))
+    t.ok(ite.isRoot(2))
+    t.ok(ite.isRoot(3))
+    t.absent(ite.isRoot(4))
+    t.absent(ite.isRoot(5))
+    t.absent(ite.isRoot(6))
+  }
+
+  {
+    const ite = flat.iterator(9)
+
+    t.absent(ite.isRoot(0))
+    t.absent(ite.isRoot(1))
+    t.absent(ite.isRoot(2))
+    t.absent(ite.isRoot(3))
+    t.absent(ite.isRoot(4))
+    t.absent(ite.isRoot(5))
+    t.ok(ite.isRoot(6))
+    t.ok(ite.isRoot(7))
+    t.absent(ite.isRoot(8))
+    t.absent(ite.isRoot(9))
+  }
+})
+
+test('peek children', function (t) {
+  const ite = flat.iterator(1)
+
+  t.is(ite.peekLeftSpan(), 0)
+  t.is(ite.peekRightSpan(), 2)
+
+  ite.next()
+
+  t.is(ite.peekLeftSpan(), 4)
+  t.is(ite.peekRightSpan(), 6)
+})
