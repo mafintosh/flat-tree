@@ -151,6 +151,10 @@ Returns how many nodes (including parent nodes) the current tree contains.
 
 Returns how many nodes (excluding parent nodes) the current tree contains.
 
+#### `bool = iterator.fullRoot(index)`
+
+Moves to the next full root (subtrees where all nodes have either 2 or 0 children) between the current index and `index`. Returns whether the iterator moved.
+
 ## See also
 
 - [mafintosh/print-flat-tree][print]: A cli that can pretty print flat-trees.
