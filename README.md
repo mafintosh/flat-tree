@@ -135,6 +135,14 @@ Is the iterator at a right sibling?
 
 Move the iterator to the current sibling.
 
+#### `index = iterator.nextTree()`
+
+Move the iterator to the next neighboring sub tree, i.e. a tree with no overlap with current index.
+
+#### `index = iterator.prevTree()`
+
+Move the iterator to the previous neighboring sub tree, i.e. a tree with no overlap with current index.
+
 #### `count = iterator.count()`
 
 Returns how many nodes (including parent nodes) the current tree contains.
@@ -142,6 +150,10 @@ Returns how many nodes (including parent nodes) the current tree contains.
 #### `count = iterator.countLeaves()`
 
 Returns how many nodes (excluding parent nodes) the current tree contains.
+
+#### `bool = iterator.fullRoot(index)`
+
+Moves to the next full root (subtrees where all nodes have either 2 or 0 children) between the current index and `index`. Returns whether the iterator moved.
 
 ## See also
 
