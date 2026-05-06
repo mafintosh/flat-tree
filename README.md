@@ -18,7 +18,7 @@ You can represent a binary tree in a simple flat list using the following struct
 
 This module exposes a series of functions to help you build and maintain this data structure
 
-``` js
+```js
 var tree = require('flat-tree')
 var list = []
 
