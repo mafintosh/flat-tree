@@ -23,7 +23,7 @@ var tree = require('flat-tree')
 var list = []
 
 var i = tree.index(0, 0) // get array index for depth: 0, offset: 0
-var j = tree.index(1, 0) // get array index for depth: 1, offset: 0
+var j = tree.index(0, 1) // get array index for depth: 0, offset: 1
 
 // use these indexes to store some data
 
